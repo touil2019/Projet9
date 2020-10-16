@@ -7,17 +7,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public class EcritureComptableTest {
+public class
+EcritureComptableTest {
 
     private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
         BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
         BigDecimal vCredit = pCredit == null ? null : new BigDecimal(pCredit);
         String vLibelle = ObjectUtils.defaultIfNull(vDebit, BigDecimal.ZERO)
                                      .subtract(ObjectUtils.defaultIfNull(vCredit, BigDecimal.ZERO)).toPlainString();
-        LigneEcritureComptable vRetour = new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
+        return new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
                                                                     vLibelle,
                                                                     vDebit, vCredit);
-        return vRetour;
     }
 
     @Test
