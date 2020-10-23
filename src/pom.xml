@@ -367,6 +367,12 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>2.10.4</version>
                 </plugin>
+                <!-- ===== Jacoco Sonar===== -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.5</version>
+                </plugin>
 
                 <!-- ===== Aide au constructions particulières ===== -->
                 <!-- Ex : Ajout de répertoire de sources générées en tant que source d'un module -->
