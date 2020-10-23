@@ -74,7 +74,7 @@ public class EcritureComptableTest {
         vEcriture.getListLigneEcriture().add(createLigne(1,"25","-29.00"));
         vEcriture.getListLigneEcriture().add(createLigne(1,"40","89.8"));
 
-        Assert.assertEquals(vEcriture.getTotalCredit(), BigDecimal.valueOf(30+(-29.00)+89.8).setScale(2, BigDecimal.ROUND_HALF_UP));
+        Assert.assertEquals(vEcriture.getTotalCredit(), BigDecimal.valueOf(30 + (-29.00) + 89.8).setScale(2, BigDecimal.ROUND_HALF_UP));
     }
 
     @Test
