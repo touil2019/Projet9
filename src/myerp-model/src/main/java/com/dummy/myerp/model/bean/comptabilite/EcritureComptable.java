@@ -1,17 +1,17 @@
 package com.dummy.myerp.model.bean.comptabilite;
 
 
+import org.apache.commons.lang3.StringUtils;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -39,6 +39,18 @@ public class EcritureComptable {
     @Valid
     @Size(min = 2)
     private final List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
+
+    public EcritureComptable() {
+    }
+
+    public EcritureComptable(Integer id, JournalComptable journal, String reference, Date date, String libelle) {
+        this.id = id;
+        this.journal = journal;
+        this.reference = reference;
+        this.date = date;
+        this.libelle = libelle;
+    }
+
 
 
     // ==================== Getters/Setters ====================
