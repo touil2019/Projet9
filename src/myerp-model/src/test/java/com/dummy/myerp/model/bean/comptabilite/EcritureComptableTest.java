@@ -12,7 +12,8 @@ import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class EcritureComptableTest {
+public class
+EcritureComptableTest {
 
     private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
         BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
