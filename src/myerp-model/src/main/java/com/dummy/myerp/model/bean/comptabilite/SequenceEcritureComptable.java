@@ -11,6 +11,7 @@ public class SequenceEcritureComptable {
     private Integer annee;
     /** La dernière valeur utilisée */
     private Integer derniereValeur;
+    private JournalComptable journalComptable;
 
     // ==================== Constructeurs ====================
     /**
@@ -45,6 +46,13 @@ public class SequenceEcritureComptable {
         derniereValeur = pDerniereValeur;
     }
 
+    public JournalComptable getJournalComptable() {
+        return journalComptable;
+    }
+
+    public void setJournalComptable(JournalComptable journalComptable) {
+        this.journalComptable = journalComptable;
+    }
 
     // ==================== Méthodes ====================
     @Override
