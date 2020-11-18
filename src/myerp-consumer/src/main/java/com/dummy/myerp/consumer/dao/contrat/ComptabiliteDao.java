@@ -97,4 +97,11 @@ public interface ComptabiliteDao {
      */
     SequenceEcritureComptable getSequenceEcritureComptable(String pJournal, Integer pAnnee);
 
+    /**
+     *
+     * @param sequenceEcritureComptable
+     */
+    void insertSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable );
+
+
 }

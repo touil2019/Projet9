@@ -1,11 +1,12 @@
 package com.dummy.myerp.business.contrat.manager;
 
-import java.util.List;
-
 import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
 import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
 import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
+import com.dummy.myerp.model.bean.comptabilite.SequenceEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
+
+import java.util.List;
 
 
 /**
@@ -35,6 +36,12 @@ public interface ComptabiliteManager {
      * @return {@link List}
      */
     List<EcritureComptable> getListEcritureComptable();
+
+    SequenceEcritureComptable getSequenceEcritureComptable(String pJournal, Integer pAnnee);
+
+    void updateSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable);
+
+    void insertSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable);
 
     /**
      * Ajoute une référence à l'écriture comptable.
