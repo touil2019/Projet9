@@ -195,6 +195,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         // TODO ===== RG_Compta_5 : Format et contenu de la référence
         // vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal...
 
+
         Date date = pEcritureComptable.getDate();
 
         Calendar calendar = Calendar.getInstance();

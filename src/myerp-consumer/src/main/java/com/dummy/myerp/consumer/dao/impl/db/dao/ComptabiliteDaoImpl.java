@@ -173,6 +173,7 @@ public class ComptabiliteDaoImpl<Private> extends AbstractDbConsumer implements 
     }
 
     /** SQLinsertListLigneEcritureComptable */
+    
     private static String SQLinsertListLigneEcritureComptable;
     public void setSQLinsertListLigneEcritureComptable(String pSQLinsertListLigneEcritureComptable) {
         SQLinsertListLigneEcritureComptable = pSQLinsertListLigneEcritureComptable;

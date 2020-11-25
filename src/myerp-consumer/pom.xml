@@ -36,9 +36,18 @@
     <!-- Properties -->
     <!-- =============================================================== -->
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
+        <buildTime>${maven.build.timestamp}</buildTime>
+
+        <!-- ===== Application properties ===== -->
+        <application.name>MyERP</application.name>
+
+        <!-- ===== Version properties ===== -->
+        <log4j.version>2.8.1</log4j.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
     </properties>
-
-
     <!-- =============================================================== -->
     <!-- Dependencies -->
     <!-- =============================================================== -->
@@ -88,25 +97,34 @@
             <id>test-consumer</id>
             <build>
                 <plugins>
+                    <!-- Ajout du répertoire src/test-consumer/java en tant que source de test du module -->
                     <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
                         <executions>
                             <execution>
+                                <id>add-test-source</id>
+                                <phase>generate-test-sources</phase>
                                 <goals>
-                                    <goal>prepare-agent</goal>
+                                    <goal>add-test-source</goal>
                                 </goals>
-                            </execution>
-                            <execution>
-                                <id>report-aggregate</id>
-                                <phase>test</phase>
-                                <goals>
-                                    <goal>report-aggregate</goal>
-                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>src/test-consumer/java</source>
+                                    </sources>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
                 </plugins>
+                <testResources>
+                    <testResource>
+                        <directory>src/test/resources</directory>
+                    </testResource>
+                    <testResource>
+                        <directory>src/test-consumer/resources</directory>
+                    </testResource>
+                </testResources>
             </build>
         </profile>
     </profiles>
@@ -120,6 +138,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
                 <executions>
                     <execution>
                         <goals>
@@ -127,7 +146,7 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
+                        <id>report-aggregate</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>report-aggregate</goal>
