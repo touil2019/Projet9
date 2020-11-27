@@ -27,7 +27,7 @@ public class EcritureComptableTest {
 
 
     /**
-     * before each test initialize the variable
+     * Avant chaque test initialiser la variable
      */
     @Before
     public void initCompatibiliteManagerImpl(){
@@ -40,16 +40,21 @@ public class EcritureComptableTest {
     }
 
     /**
-     * After each test reset the variable vEcriture
+     * Après chaque test, réinitialisez la variable vEcriture
      */
     @After
     public void ResetvEcritureComptable(){
         vEcriture=new EcritureComptable();
     }
 
-
+    /**
+     * Teste l'équilibre des lignes comptables entre Débit et Crédit
+     * entrant:EcritureComptable
+     * sortant: la valeur True ou false
+     * attendu: Vérifier les lignes d'écritures à l'équilibre et non équilibrés
+     */
     @Test
-    public void isEquilibree() {
+    public void isEquilibre() {
         EcritureComptable vEcriture;
         vEcriture = new EcritureComptable();
 
@@ -69,11 +74,23 @@ public class EcritureComptableTest {
         Assert.assertFalse(vEcriture.toString(), vEcriture.isEquilibree());
     }
 
+    /**
+     * Teste l'équalité entre les valeurs numériques et le total des lignes d'écritures au crédit au format
+     *entrant: EcritureComptable
+     *sortant: montant total des lignes d'écritures aux crédits
+     *attendu: Vérifier le retour du montant total des crédits avec 2 chiffres après la virgule
+     */
     @Test
     public void getTotalDebit(){
-        Assert.assertEquals(vEcriture.getTotalCredit(), BigDecimal.valueOf(33+301+7));
+        Assert.assertEquals(vEcriture.getTotalCredit(), BigDecimal.valueOf(33+301+7).setScale(2));
     }
 
+    /**
+     * Teste l'equalité entre les valeurs numériques et le total des lignes d'écritures au débit au format
+     *entrant: EcritureComptable
+     *sortant: montant total des lignes d'écritures aux débits
+     *attendu: Vérifier le retour du montant total des débits avec 2 chiffres après la virgule
+     */
     @Test
     public void getTotalCredit() {
         Assert.assertEquals(vEcriture.getTotalDebit(), BigDecimal.valueOf(200.50+100.50+40).setScale(2));

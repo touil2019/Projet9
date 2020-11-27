@@ -78,7 +78,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         // TODO à implémenter
         // Bien se réferer à la JavaDoc de cette méthode !
         /* Le principe :
-                1.  Remonter depuis la persitance la dernière valeur de la séquence du journal pour l'année de l'écriture
+                1.  Remonter depuis la persitance de la dernière valeur de la séquence du journal pour l'année de l'écriture
                     (table sequence_ecriture_comptable)
         /*
 
@@ -152,9 +152,11 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
      * @param pEcritureComptable -
      * @throws FunctionalException Si l'Ecriture comptable ne respecte pas les règles de gestion
      */
-    // TODO tests à compléter
+
     protected void checkEcritureComptableUnit(EcritureComptable pEcritureComptable) throws FunctionalException {
+
         // ===== Vérification des contraintes unitaires sur les attributs de l'écriture
+
         Set<ConstraintViolation<EcritureComptable>> vViolations = getConstraintValidator().validate(pEcritureComptable);
         if (!vViolations.isEmpty()) {
             throw new FunctionalException("L'écriture comptable ne respecte pas les règles de gestion.",
@@ -164,19 +166,19 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         }
 
 
-
         // ===== RG_Compta_3 : une écriture comptable doit avoir au moins 2 lignes d'écriture (1 au débit, 1 au crédit)
         int vNbrCredit = 0;
         int vNbrDebit = 0;
         for (LigneEcritureComptable vLigneEcritureComptable : pEcritureComptable.getListLigneEcriture()) {
             if (BigDecimal.ZERO.compareTo(ObjectUtils.defaultIfNull(vLigneEcritureComptable.getCredit(),
-                                                                    BigDecimal.ZERO)) != 0) {
+                    BigDecimal.ZERO)) != 0) {
                 vNbrCredit++;
             }
             if (BigDecimal.ZERO.compareTo(ObjectUtils.defaultIfNull(vLigneEcritureComptable.getDebit(),
-                                                                    BigDecimal.ZERO)) != 0) {
+                    BigDecimal.ZERO)) != 0) {
                 vNbrDebit++;
             }
+        }
             // On test le nombre de lignes car si l'écriture à une seule ligne
             //      avec un montant au débit et un montant au crédit ce n'est pas valable
             if (pEcritureComptable.getListLigneEcriture().size() < 2
@@ -190,7 +192,6 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
             if (!pEcritureComptable.isEquilibree()) {
                 throw new FunctionalException("L'écriture comptable n'est pas équilibrée.");
             }
-        }
 
         // TODO ===== RG_Compta_5 : Format et contenu de la référence
         // vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal...
@@ -205,7 +206,6 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         }else if(!pEcritureComptable.getJournal().getCode().equals(pEcritureComptable.getReference().substring(0,2))){
             throw new FunctionalException("le code de la référence de l'écriture comptable n'est pas conforme.");
         }
-
 
     }
 

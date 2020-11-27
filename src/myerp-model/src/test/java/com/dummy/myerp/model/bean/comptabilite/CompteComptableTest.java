@@ -1,41 +1,64 @@
 package com.dummy.myerp.model.bean.comptabilite;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+public class CompteComptableTest {
 
-class CompteComptableTest {
+    List<CompteComptable> compteComptables;
 
-    private CompteComptable compteComptableUnderTest;
+    @Before
+    public void initCcompteComptables(){
+        CompteComptable compteComptable=new CompteComptable();
+        compteComptable.setLibelle("1er compte");
+        compteComptable.setNumero(1);
+        compteComptables =new ArrayList<>();
+        compteComptables.add(compteComptable);
 
-    @BeforeEach
-    void setUp() {
-        compteComptableUnderTest = new CompteComptable(0, "pLibelle");
     }
 
-    @Test
-    void testToString() {
-        // Setup
+    /**
+     * After each test reset object comptes
+*/
+    @After
+    public void ResetcompteComptables(){
 
-        // Run the test
-        final String result = compteComptableUnderTest.toString();
-
-        // Verify the results
-        assertEquals("CompteComptable{numero=0, libelle='pLibelle'}", result);
+        List<CompteComptable> compteComptables = new ArrayList<>();
     }
 
+
+    /**
+     * test sur la méthode checkGetbyNuméro
+     * entrant:liste de CompteComptable
+     * sortant: vérifier la liste comptable par numéro et libéllé
+     * attendu: CompteComptable
+     */
     @Test
-    void testGetByNumero() {
-        // Setup
-        final List<? extends CompteComptable> pList = Arrays.asList(new CompteComptable(0, "pLibelle"));
+    public void checkGetByNumero(){
 
-        // Run the test
-        final CompteComptable result = CompteComptable.getByNumero(pList, 0);
 
-        // Verify the results
+        Assert.assertEquals(CompteComptable.getByNumero(compteComptables,1).getLibelle(),"1er compte");
+        Assert.assertEquals(CompteComptable.getByNumero(compteComptables, 1).getNumero().intValue(), 1);
+
+    }
+
+    /**
+     * test sur la méthode GetByNumero
+     * entrant:liste de CompteComptable
+     * sortant: vérifier la liste comptable par numéro soit incomplète
+     * attendu: null CompteComptable
+     */
+    @Test
+    public void checkGetByNumeroIsNullReturn(){
+
+
+        Assert.assertEquals(CompteComptable.getByNumero(compteComptables,2),null);
+
+
     }
 }
