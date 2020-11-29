@@ -3,7 +3,7 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
-
+    <!-- BusinessProxy -->
     <!-- Transaction Manager -->
     <bean id="TransactionManager"
           class="com.dummy.myerp.business.impl.TransactionManager"
@@ -12,9 +12,16 @@
         <constructor-arg ref="txManagerMYERP"/>
     </bean>
 
+    <bean id="dataSourceMYERP" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value = "org.postgresql.Driver" />
+        <property name="url" value = "jdbc:postgresql://localhost:9032/db_myerp" />
+        <property name="username" value = "usr_myerp" />
+        <property name="password" value = "myerp" />
+    </bean>
 
     <!-- PlatformTransactionManager pour le DataSource MYERP -->
     <bean id="txManagerMYERP" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSourceMYERP"/>
     </bean>
 </beans>
+
