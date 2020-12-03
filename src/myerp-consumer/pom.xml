@@ -36,23 +36,15 @@
     <!-- Properties -->
     <!-- =============================================================== -->
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
-        <buildTime>${maven.build.timestamp}</buildTime>
-
-        <!-- ===== Application properties ===== -->
-        <application.name>MyERP</application.name>
-
-        <!-- ===== Version properties ===== -->
-        <log4j.version>2.8.1</log4j.version>
-        <spring.version>4.3.7.RELEASE</spring.version>
     </properties>
+
+
     <!-- =============================================================== -->
     <!-- Dependencies -->
     <!-- =============================================================== -->
     <dependencies>
         <!-- ===== Modules ===== -->
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>myerp-model</artifactId>
@@ -77,7 +69,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
-            <scope>test</scope>
+            <version>2.1</version>
         </dependency>
         <!-- Drivers JDBC PostgreSQL -->
         <dependency>
@@ -116,6 +108,25 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.8.5</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report-aggregate</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>report-aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
                 <testResources>
                     <testResource>
@@ -134,26 +145,5 @@
     <!-- Build -->
     <!-- =============================================================== -->
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report-aggregate</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report-aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
     </build>
 </project>

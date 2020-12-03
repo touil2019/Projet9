@@ -37,11 +37,16 @@ public interface ComptabiliteManager {
      */
     List<EcritureComptable> getListEcritureComptable();
 
+
     SequenceEcritureComptable getSequenceEcritureComptable(String pJournal, Integer pAnnee);
 
     void updateSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable);
 
     void insertSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable);
+
+    void deleteSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable);
+
+    List<SequenceEcritureComptable> getListSequenceEcritureComptable();
 
     /**
      * Ajoute une référence à l'écriture comptable.

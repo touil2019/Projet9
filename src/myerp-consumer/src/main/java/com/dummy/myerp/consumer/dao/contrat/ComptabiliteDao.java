@@ -103,5 +103,7 @@ public interface ComptabiliteDao {
      */
     void insertSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable );
 
+    void deleteSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable);
 
+    List<SequenceEcritureComptable> getListSequenceEcritureComptable();
 }

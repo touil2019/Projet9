@@ -2,7 +2,7 @@ package com.dummy.myerp.model.bean.comptabilite;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +34,13 @@ public class JournalComptableTest {
      */
     @Test
     public void checkMethodGetByCode(){
-
-        Assert.assertEquals(JournalComptable.getByCode(journalComptableList,"AC").getLibelle(),"Achat");
-        Assert.assertEquals(JournalComptable.getByCode(journalComptableList,"AC").getCode(),"AC");
+        JournalComptable journalComptable = new JournalComptable();
+        journalComptable.setLibelle("Achat");
+        journalComptable.setCode("AC");
+        List<JournalComptable> list= new ArrayList<>();
+        list.add(journalComptable);
+        Assert.assertEquals(JournalComptable.getByCode(list,"AC").getLibelle(),"Achat");
+        Assert.assertEquals(JournalComptable.getByCode(list,"AC").getCode(),"AC");
     }
 
     /**

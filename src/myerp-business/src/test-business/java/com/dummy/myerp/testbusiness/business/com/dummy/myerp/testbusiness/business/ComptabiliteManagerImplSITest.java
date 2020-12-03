@@ -4,9 +4,8 @@ import com.dummy.myerp.business.impl.manager.ComptabiliteManagerImpl;
 import com.dummy.myerp.model.bean.comptabilite.*;
 import com.dummy.myerp.technical.exception.FunctionalException;
 import org.junit.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.runners.MethodSorters;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -23,8 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(locations = {"classpath:com/dummy/myerp/business/bootstrapContext.xml"})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @ExtendWith(MockitoExtension.class)
-
-public class ComptabiliteManagerImplSITest extends BusinessTestCase {
+public class ComptabiliteManagerImplSITest extends com.dummy.myerp.testbusiness.business.BusinessTestCase {
 
     @Mock
     private ComptabiliteManagerImpl manager;
@@ -178,18 +176,15 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
             e.printStackTrace();
         }
         vEcritureComptable.setDate(date);
-  //      manager.checkFormatEtContenuOfReferenceOfEcritureCompatble(vEcritureComptable);
+        manager.checkFormatEtContenuOfReferenceOfEcritureCompatble(vEcritureComptable);
     }
 
-
     /**
-     * test on several bad references, expect exception in each case, test
-     * @param args
+     * Teste que le format de l'écriture est conforme aux règles de gestion
      * @throws FunctionalException
      */
-    @ParameterizedTest
-    @ValueSource(strings = {"1C-2016/00001","A2-2016/00001","AC/2016/00001","AC-A016/00001","AC-2B16/00001","AC-20C6/00001","AC-201D/00001","AC-2016-00001","AC-2016/A0001","AC-2016/0B001","AC-2016/00C01","AC-2016/000D1","AC-2016/0000E" })
-    public void test9_checkFormatEtContenuOfReferenceOfEcritureCompatble_withErrorsInReference_expectFunctionalException(String args) throws FunctionalException{
+    @Test(expected = FunctionalException.class)
+    public void test9_checkFormatEtContenuOfReferenceOfEcritureCompatble_withErrorsInReference_expectFunctionalException()throws FunctionalException{
         ComptabiliteManagerImpl manag = new ComptabiliteManagerImpl();
         EcritureComptable ecritureComptable = new EcritureComptable();
         JournalComptable journalComptable = new JournalComptable("AC", "Achat");
@@ -200,22 +195,24 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
         ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(401),null, new BigDecimal(123),null));
         ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(411),null, null,new BigDecimal(123)));
 
-        ecritureComptable.setReference(args);
+        ecritureComptable.setReference("AC-2016/00001");
+        manager.checkFormatEtContenuOfReferenceOfEcritureCompatble(ecritureComptable);
 
-
-//        Assertions.assertThrows(FunctionalException.class, () -> {
-  //          manag.checkFormatEtContenuOfReferenceOfEcritureCompatble(ecritureComptable); });
+       Assertions.assertThrows(FunctionalException.class, () -> {
+            manager.checkFormatEtContenuOfReferenceOfEcritureCompatble(ecritureComptable); });
     }
 
     /**
      * test on method addReference
      * @throws FunctionalException
+     */
 
-    @Test
+  @Test
     public void test10_AddReference() throws FunctionalException{
 
         manager = new ComptabiliteManagerImpl();
         vEcritureComptable = new EcritureComptable();
+        vEcritureComptable.setId(1);
         vEcritureComptable.setLibelle("libelle addReference");
         vEcritureComptable.setDate(new Date());
         journalComptable = (new JournalComptable("BQ","Banque"));
@@ -227,7 +224,7 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
         manager.deleteSequenceEcritureComptable(manager.getSequenceEcritureComptable("BQ",2020));
 
     }
-*/
+
     /**
      * test on method UpdateSequenceEcritureComptable, with an existing reference
      * @throws FunctionalException
@@ -246,7 +243,7 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     /**
      * test on method UpdateSequenceEcritureComptable, with a new reference
      * @throws FunctionalException
-
+*/
     @Test
     public void test11_checkUpdateSequenceComptable_withNewSequence() throws FunctionalException{
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable(2020,0);
@@ -258,10 +255,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
         manager.deleteSequenceEcritureComptable(sequenceEcritureComptable);
 
     }
-*/
+
     /**
      * test on Insert and Delete SequenceEcritureComptable
      * @throws FunctionalException
+     */
 
     @Test
     public  void test12_checkInsertAndDeleteSequenceEcritureComptable() throws FunctionalException{
@@ -273,7 +271,7 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
         manager.deleteSequenceEcritureComptable(sequenceEcritureComptable);
         assertThat(manager.getListSequenceEcritureComptable().size()).isEqualTo(sizeList);
     }
-*/
+
 
 
 }
