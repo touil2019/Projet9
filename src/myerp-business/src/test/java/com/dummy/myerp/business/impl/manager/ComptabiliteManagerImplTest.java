@@ -121,29 +121,6 @@ public void checkEcritureComptableUnit_RG3() throws Exception {
         Assertions.assertThrows(FunctionalException.class, () -> {manager.checkEcritureComptableUnit(vEcritureComptable);});
     }
 
-    /**
-     *
-     * @throws Exception
-
-    @Test (expected = FunctionalException.class)
-    public void checkEcritureComptableContext_RG6() throws Exception {
-        EcritureComptable vEcritureComptable;
-        vEcritureComptable = new EcritureComptable();
-        vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
-        vEcritureComptable.setDate(new Date());
-        vEcritureComptable.setId(1);
-        vEcritureComptable.setReference("AB-2020/00001");
-        vEcritureComptable.setLibelle("Libelle");
-        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
-                null, new BigDecimal(123),
-                null));
-        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
-                null, null,
-                new BigDecimal(123)));
-        manager.checkEcritureComptableContext(vEcritureComptable);
-
-        Assertions.assertThrows(FunctionalException.class, () -> {manager.checkEcritureComptableContext(vEcritureComptable);});
-   }*/
 
 
 

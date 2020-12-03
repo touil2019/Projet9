@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(locations = {"classpath:com/dummy/myerp/business/bootstrapContext.xml"})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @ExtendWith(MockitoExtension.class)
-public class ComptabiliteManagerImplSITest extends com.dummy.myerp.testbusiness.business.BusinessTestCase {
+public class ComptabiliteManagerImplSITest extends BusinessTestCase {
 
     @Mock
     private ComptabiliteManagerImpl manager;
