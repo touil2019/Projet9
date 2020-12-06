@@ -30,7 +30,8 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     private JournalComptable journalComptable;
 
     /**
-     * Before each test initialize the variables
+     *
+     * Avant chaque test, initialisez les variables
      */
     @Before
     public void comptabiliteManagerImplSIT_Init(){
@@ -42,7 +43,7 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * after each test reset the variables
+     * après chaque test, réinitialiser les variables
      */
     @After
     public void ResetvEcritureComptable(){
@@ -51,7 +52,12 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on DB connection
+     * test sur la connexion à la base de donnée
+     *
+     * entrant: une liste d'écriture comptable
+     * sortant: vérification de la connexion à la base de donnée
+     * attendu: vérification de la creation d une listEcritureComptable
+     *
      * @throws FunctionalException
      */
     @Test
@@ -63,7 +69,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on method InsertEcritureComptable, with a free reference
+     * teste sur la méthode InsertEcritureComptable avec une reference
+     *
+     * entrant: EcritureComptable
+     * sortant: EcritureComptable
+     * attendu: Vérification de la liste d'ecritue comptable avant et après insertion avec contrôle de la référence
      * @throws FunctionalException
      */
     @Test
@@ -82,7 +92,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on method InsertEcritureComptable, with an used reference, expect exception
+     * teste la méthode InsertEcriture comptable avec une référence pour lever une exception
+     *
+     * entrant: JournalComptable
+     * sortant: EcritureComptable
+     * attendu: Vérification de la creation d une ecriture comptable
      * @throws FunctionalException
      */
     @Test(expected = FunctionalException.class)
@@ -97,7 +111,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on method DeleteEcritureComptable
+     * teste sur la méthode DeleteEcritureComptable
+     *
+     * entrant: Ecriture Comptable
+     * sortant: ListEcritureComptable
+     * attendu: Vérification sur la taille de la liste après suppression d'une écriture comptable
      * @throws FunctionalException
      */
     @Test
@@ -115,7 +133,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on mehod UpdateEcritureComptable
+     * teste sur la méthode UpdateEcritureComptable
+     *
+     * entrant: EcritureComptable
+     * sortant: EcritureComptable
+     * attendu: Vérification de la mise à jour d une ecriture comptable
      * @throws FunctionalException
      */
     @Test
@@ -133,7 +155,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on method checkEcritureComptable
+     * teste sur la méthode CheckEcritureComptable
+     *
+     * entrant: EcritureComptable
+     * sortant: EcritureComptable
+     * attendu: Vérification de l écriture comptable
      * @throws FunctionalException
      */
     @Test
@@ -145,7 +171,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
         manager.checkEcritureComptable(vEcritureComptable);
     }
     /**
-     * test on method checkEcritureComptable, expect exception
+     * teste la méthode chechEcriture sans lever d exception
+     *
+     * entrant: EcritureComptable
+     * sortant: EcritureComptable
+     * attendu: Vérification de la ligne d écriture comptable
      * @throws FunctionalException
      */
     @Test(expected = FunctionalException.class)
@@ -160,7 +190,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on format and composition of reference
+     * teste la méthode checkFormatEtContenuOfReferenceOfEcritureComptable
+     *
+     * entrant:EcritureComptable
+     * sortant:EcritureComptable
+     * attendu:Vérification du format et la composition de la référence
      * @throws FunctionalException
      */
     @Test
@@ -180,7 +214,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * Teste que le format de l'écriture est conforme aux règles de gestion
+     * Teste sur la méthode checkFormatEtContenuOfReferenceOfEcritureCompatble_withErrorsInReference_expectFunctionalException
+     *
+     * entrant: EcritureComptable
+     * sortant: EcritureComptable
+     * attendu: Vérification du format de l'écriture conforme aux règles de gestion
      * @throws FunctionalException
      */
     @Test(expected = FunctionalException.class)
@@ -203,7 +241,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on method addReference
+     * teste sur la méthode addReference
+     *
+     * entrant: EcritureComptable
+     * sortant: JournalComptable
+     * attendu: Vérification de l'ajout d une référence dans le journal comptable
      * @throws FunctionalException
      */
 
@@ -226,7 +268,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on method UpdateSequenceEcritureComptable, with an existing reference
+     * teste sur la méthode UpdateSequenceEcritureComptable avec une référence existante
+     *
+     * entrant: SequenceEcritureComptable
+     * sortant: SequenceEcritureComptable
+     * attendu: Vérification de la mise à jour de la SéquenceEcritureComptable
      * @throws FunctionalException
      */
     @Test
@@ -241,7 +287,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on method UpdateSequenceEcritureComptable, with a new reference
+     * teste sur la méthode UpdateSequenceEcritureComptable avec une nouvelle référence
+     *
+     * entrant: SequenceEcritureComptable
+     * sortant: SequenceEcritureComptable
+     * attendu: Vérification de la mise à jour d une Séquence d écriture comptable
      * @throws FunctionalException
 */
     @Test
@@ -257,7 +307,11 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test on Insert and Delete SequenceEcritureComptable
+     * teste sur la méthode checkInsertAndDeleteSequenceEcritureComptable
+     *
+     * entrant: SequenceEcritureComptable
+     * sortant: ListSequenceEcritureComptable
+     * attendu: Vérification de la création et la suprression d une SequenceComptable
      * @throws FunctionalException
      */
 
