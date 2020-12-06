@@ -1,6 +1,6 @@
 Projet P9
 
-TAUX DE COVERAGE du projet : 88%
+TAUX de couverture du projet : 88%
 
 Répertoire - doc : Diagramme de classes, configuration jenkins, taux de coverage
 Répertoire - docker : conteneur docker de la base de données du projet
