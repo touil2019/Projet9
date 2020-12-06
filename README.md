@@ -1,16 +1,21 @@
-# MyERP
-
 Projet P9
-TAUX DE COVERAGE du projet : 80%
+
+TAUX DE COVERAGE du projet : 88%
+
 Répertoire - doc : Diagramme de classes, configuration jenkins, taux de coverage
 Répertoire - docker : conteneur docker de la base de données du projet
+
 Requêtes SQL :
+
 Création de la base de données et du jeux de données : 
     - /docker/dev/init/dev/docker-entrypoint-initdb.b/*
 Les requêtes du projet :
     - /myerp-consumer/src/main/resources/com/dummy/myerp/consumer/sqlContext.xml
+	
 Initialisation du projet
+
 1 - Docker :
+
 Dans le fichier /docker/dev/docker-compose.yml modifier l'adresse IP en fonction de votre propre environnement
 
 ports:
@@ -35,19 +40,17 @@ Lancer docker-compose (préalablement installé) puis lancer en commande gitBASH
     docker-compose stop
     docker-compose rm -v
     docker-compose up
-    
+	
 2 - Properties Database
-
 Modifier l'adresse ip que vous avez paramétré dans docker
 
-- /myerp-consumer/src/main/resources/database.properties :
+- myerp-consumer\src\main\resources\com\dummy\myerp\consumer\applicationContext.xml :
     myerp.datasource.driver=org.postgresql.Driver
     myerp.datasource.url=jdbc:postgresql://[votre adresse ip]:9032/db_myerp
     myerp.datasource.username=usr_myerp
     myerp.datasource.password=myerp
-    
+	
 3 - Tests unitaires
-
 Afin de vérifier le coverage on s'appuie sur jacoco les profiles à activer sont :
 
 - test-business et test-consumer
@@ -62,7 +65,7 @@ Pour le taux de coverage :
     - myerp-business/target/site/jacoco/index.html
     - myerp-consumer/target/site/jacoco/index.html
     - myerp-model/target/site/jacoco/index.html
-    
+	
 - soit avec jenkins
 Configuration de Jenkins
 Une fois Jenkins installé ( https://www.jenkins.io/doc/book/installing/), il est conseillé de
@@ -86,11 +89,11 @@ sauvegarder entre chaque étape.
     **/**.exec , que Path to class directories (e.g.: **/target/classDir, **/classes) soit à  
     **/classes , que Path to source directories (e.g.: **/mySourceFiles) soit à: **/src/main/java  ,
     que Inclusions (e.g.: **/*.java,**/*.groovy,**/*.gs) soit à: **/*.java,**/*.groovy,**/*.kt,**/*.kts]
-    
-    
+	
 Correctifs principaux
 
 Absence de la configuration de la dataSource
+
 Dans l'entité EcritureComptable, correction des méthodes getTotalCredit() && getTotalDebit() sur le format de retour 2 chiffres après la virgule
 Dans l'entité EcritureComptable, correction de la méthode getTotalCredit() qui accédait à la méthode getDebit() au lieu de getCredit()
 Dans l'entité EcritureComptable, correction de l'expression régulière qui était erronée
