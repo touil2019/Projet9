@@ -103,6 +103,10 @@ public void checkEcritureComptableUnit_RG3() throws Exception {
     Assertions.assertThrows(FunctionalException.class, () -> {manager.checkEcritureComptableUnit(vEcritureComptable);});
 }
 
+    /**
+     * test sur la méthode checkEcritureComptableUnit_RG3_CheckErrorMessage
+     * @throws FunctionalException
+     */
     @Test
     public void checkEcritureComptableUnit_RG3_CheckErrorMessage() throws FunctionalException {
         try {
@@ -153,6 +157,11 @@ public void checkEcritureComptableUnit_RG3() throws Exception {
         Assertions.assertThrows(FunctionalException.class, () -> {manager.checkEcritureComptableUnit(vEcritureComptable);});
     }
 
+    /**
+     * Test la méthode checkEcritureComptableUnit_IsNotEquilibre_CheckErrorMessage
+     *
+     * @throws FunctionalException
+     */
     @Test
     public void checkEcritureComptableUnit_IsNotEquilibre_CheckErrorMessage() throws FunctionalException {
         try {
@@ -174,6 +183,10 @@ public void checkEcritureComptableUnit_RG3() throws Exception {
         }
     }
 
+    /**
+     * Test la méthode checkFormatEtContenuOfReferenceOfEcritureCompatble_CheckErrorMessage
+     * @throws FunctionalException
+     */
     @Test
     public void checkFormatEtContenuOfReferenceOfEcritureCompatble_CheckErrorMessage() throws FunctionalException {
         try {
