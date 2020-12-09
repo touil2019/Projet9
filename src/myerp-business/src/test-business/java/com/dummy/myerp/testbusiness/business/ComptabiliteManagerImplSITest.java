@@ -52,7 +52,7 @@ public class ComptabiliteManagerImplSITest extends BusinessTestCase {
     }
 
     /**
-     * test sur la connexion à la base de donnée
+     * test sur la connexion à la base de donnée test
      *
      * entrant: une liste d'écriture comptable
      * sortant: vérification de la connexion à la base de donnée
