@@ -11,8 +11,9 @@ import org.junit.jupiter.api.Assertions;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
 public class ComptabiliteManagerImplTest {
+
+
 
     private ComptabiliteManagerImpl manager = new ComptabiliteManagerImpl();
 
@@ -50,24 +51,31 @@ public class ComptabiliteManagerImplTest {
      * attendu: Lever une exception car la référence ne respecte pas les contraintes
      * @throws Exception
      */
-    @Test (expected = FunctionalException.class)
-    public void checkEcritureComptableUnit_ContraintViolation() throws Exception {
-        EcritureComptable vEcritureComptable;
-        vEcritureComptable = new EcritureComptable();
-        vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
-        vEcritureComptable.setDate(new Date());
-        vEcritureComptable.setReference("ABC-2020/00001");
-        vEcritureComptable.setLibelle("Libelle");
-        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
-                null, new BigDecimal(123),
-                null));
-        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
-                null, null,
-                new BigDecimal(123)));
-        manager.checkEcritureComptableUnit(vEcritureComptable);
+    @Test
+    public void checkEcritureComptableUnit_ContraintViolation() throws FunctionalException {
 
-        Assertions.assertThrows(FunctionalException.class, () -> {manager.checkEcritureComptableUnit(vEcritureComptable);});
+ try{
+     EcritureComptable vEcritureComptable;
+     vEcritureComptable = new EcritureComptable();
+     vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+     vEcritureComptable.setDate(new Date());
+     vEcritureComptable.setReference("ABC-2020/00001");
+     vEcritureComptable.setLibelle("Libelle");
+     vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+             null, new BigDecimal(123),
+             null));
+     vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+             null, null,
+             new BigDecimal(123)));
+     manager.checkEcritureComptableUnit(vEcritureComptable);
+
+
+    } catch (FunctionalException e){
+     Assertions.assertEquals(e.getMessage(),"L'écriture comptable ne respecte pas les règles de gestion.");
+
+ }
     }
+
 /**
  * Test de la méthode CheckEcritureComptableUnit
  * entrant: EcritureComptable
@@ -86,7 +94,7 @@ public void checkEcritureComptableUnit_RG3() throws Exception {
     vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
             null, new BigDecimal(123),
             null));
-   vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+    vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
             null,  new BigDecimal(123),
             null));
 
@@ -94,6 +102,30 @@ public void checkEcritureComptableUnit_RG3() throws Exception {
 
     Assertions.assertThrows(FunctionalException.class, () -> {manager.checkEcritureComptableUnit(vEcritureComptable);});
 }
+
+    @Test
+    public void checkEcritureComptableUnit_RG3_CheckErrorMessage() throws FunctionalException {
+        try {
+            EcritureComptable vEcritureComptable;
+            vEcritureComptable = new EcritureComptable();
+            vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+            vEcritureComptable.setDate(new Date());
+            vEcritureComptable.setReference("AB-2020/00001");
+            vEcritureComptable.setLibelle("Libelle");
+            vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                    null, new BigDecimal(123),
+                    null));
+            vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                    null, new BigDecimal(123),
+                    null));
+
+            manager.checkEcritureComptableUnit(vEcritureComptable);
+        } catch (FunctionalException e) {
+
+            Assertions.assertEquals(e.getMessage(),"L'écriture comptable doit avoir au moins deux lignes : une ligne au débit et une ligne au crédit.");
+        }
+    }
+
 
     /**
      *Test la méthode checkEcritureComptableUnit_IsNotEquilibre
@@ -121,7 +153,26 @@ public void checkEcritureComptableUnit_RG3() throws Exception {
         Assertions.assertThrows(FunctionalException.class, () -> {manager.checkEcritureComptableUnit(vEcritureComptable);});
     }
 
-
+    @Test
+    public void checkEcritureComptableUnit_IsNotEquilibre_CheckErrorMessage() throws FunctionalException {
+        try {
+            EcritureComptable vEcritureComptable;
+            vEcritureComptable = new EcritureComptable();
+            vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+            vEcritureComptable.setDate(new Date());
+            vEcritureComptable.setReference("AB-2020/00001");
+            vEcritureComptable.setLibelle("Libelle");
+            vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                    null, new BigDecimal(123),
+                    null));
+            vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                    null, null,
+                    new BigDecimal(1234)));
+            manager.checkEcritureComptableUnit(vEcritureComptable);
+        } catch (FunctionalException e) {
+           Assertions.assertEquals(e.getMessage(),"L'écriture comptable n'est pas équilibrée.");
+        }
+    }
 
 
 
